@@ -1,16 +1,7 @@
-[hub]: https://hub.docker.com/r/loxoo/flood
-[mbdg]: https://microbadger.com/images/loxoo/flood
-[git]: https://github.com/triptixx/flood
-[actions]: https://github.com/triptixx/flood/actions
+[hub]: https://hub.docker.com/r/domizhang/flood
+[git]: https://github.com/zhdsmy/flood
 
-# [loxoo/flood][hub]
-[![Layers](https://images.microbadger.com/badges/image/loxoo/flood.svg)][mbdg]
-[![Latest Version](https://images.microbadger.com/badges/version/loxoo/flood.svg)][hub]
-[![Git Commit](https://images.microbadger.com/badges/commit/loxoo/flood.svg)][git]
-[![Docker Stars](https://img.shields.io/docker/stars/loxoo/flood.svg)][hub]
-[![Docker Pulls](https://img.shields.io/docker/pulls/loxoo/flood.svg)][hub]
-[![Build Status](https://github.com/triptixx/flood/workflows/docker%20build/badge.svg)][actions]
-
+# [domizhang/flood][hub]
 ## Usage
 
 ```shell
@@ -23,7 +14,7 @@ docker run -d \
     -e FLOOD_OPTION_rthost=localhost \
     -e FLOOD_OPTION_rtport=5000 \
     -v $PWD/data:/data \
-    loxoo/flood
+    domizhang/flood
 ```
 
 ## Environment

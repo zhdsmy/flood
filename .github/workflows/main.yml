@@ -11,17 +11,17 @@ jobs:
       - name: clone
         uses: actions/checkout@master
       - name: build
-        uses: triptixx/action-docker-build@master
+        uses: zhdsmy/action-docker-build@master
         with:
           repo: flood-dev
       - name: test
-        uses: triptixx/action-docker-test@master
+        uses: zhdsmy/action-docker-test@master
         with:
           verbose: true
           repo: flood-dev
           curl: :3000
       - name: publish
-        uses: triptixx/action-docker-publish@master
+        uses: zhdsmy/action-docker-publish@master
         with:
           docker_username: ${{ secrets.docker_username }}
           docker_password: ${{ secrets.docker_password }}
