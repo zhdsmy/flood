@@ -1,5 +1,5 @@
 ARG ALPINE_TAG=3.15
-ARG FLOOD_VER=4.7.0
+ARG FLOOD_VER=efdd620
 
 FROM node:alpine AS builder
 
@@ -9,7 +9,7 @@ ENV NODE_OPTIONS=--openssl-legacy-provider
 ### install flood
 WORKDIR /output/flood
 RUN apk add --no-cache git; \
-    git clone https://github.com/jesec/flood.git --branch v${FLOOD_VER} /flood-src; \
+    git clone https://github.com/jesec/flood.git /flood-src; \
     cp -a /flood-src/package.json /flood-src/package-lock.json /flood-src/.babelrc \
         /flood-src/.eslintrc.json /flood-src/.eslintignore /flood-src/tsconfig.json \
         /flood-src/.prettierrc /flood-src/.linguirc /flood-src/config.ts .; \
@@ -39,14 +39,14 @@ LABEL org.label-schema.name="flood" \
 COPY --from=builder /output/ /
 
 WORKDIR /flood
-RUN apk add --no-cache npm mediainfo
+RUN apk add --no-cache npm mediainfo curl
 
 VOLUME ["/data"]
 
 EXPOSE 9092/TCP
 
 HEALTHCHECK --start-period=10s --timeout=5s \
-    CMD wget -qO /dev/null "http://localhost:9092/login"
+    CMD curl -s -o /dev/null "http://localhost:9092/login"
 
 ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/entrypoint.sh"]
 CMD ["npm", "start", "--", "--host=0.0.0.0", "--port=9092", "--rundir=/data"]
