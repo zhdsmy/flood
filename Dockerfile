@@ -1,9 +1,10 @@
-ARG ALPINE_TAG=3.14
+ARG ALPINE_TAG=3.15
 ARG FLOOD_VER=4.7.0
 
 FROM node:alpine AS builder
 
 ARG FLOOD_VER
+ENV NODE_OPTIONS=--openssl-legacy-provider
 
 ### install flood
 WORKDIR /output/flood
@@ -42,10 +43,10 @@ RUN apk add --no-cache npm mediainfo
 
 VOLUME ["/data"]
 
-EXPOSE 3000/TCP
+EXPOSE 9092/TCP
 
 HEALTHCHECK --start-period=10s --timeout=5s \
-    CMD wget -qO /dev/null "http://localhost:3000/login"
+    CMD wget -qO /dev/null "http://localhost:9092/login"
 
 ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/entrypoint.sh"]
-CMD ["npm", "start", "--", "--host=0.0.0.0", "--rundir=/data"]
+CMD ["npm", "start", "--", "--host=0.0.0.0", "--port=9092", "--rundir=/data"]
