@@ -9,7 +9,7 @@ ENV NODE_OPTIONS=--openssl-legacy-provider
 ### install flood
 WORKDIR /output/flood
 RUN apk add --no-cache git; \
-    git clone https://github.com/jesec/flood.git --branch v${FLOOD_VER} /flood-src; \
+    git clone https://github.com/jesec/flood.git --branch ${FLOOD_VER} /flood-src; \
     cp -a /flood-src/package.json /flood-src/package-lock.json /flood-src/.babelrc \
         /flood-src/.eslintrc.json /flood-src/.eslintignore /flood-src/tsconfig.json \
         /flood-src/.prettierrc /flood-src/.linguirc /flood-src/config.ts .; \
